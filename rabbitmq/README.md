@@ -1,4 +1,3 @@
-
 ##RabbitMq 消息队列
 
 ###1. 安装RabbitMq 
