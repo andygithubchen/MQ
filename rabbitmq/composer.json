@@ -1,0 +1,12 @@
+{
+    "name": "RabbitMq",
+    "require": {
+        "php-amqplib/php-amqplib": "^2.6"
+    },
+    "authors": [
+        {
+            "name": "andychen",
+            "email": "bootoo@sina.cn"
+        }
+    ]
+}
