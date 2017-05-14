@@ -1,7 +1,6 @@
-
 ##RabbitMq 消息队列
 
-###1. 安装RabbitMq 
+###1. 安装RabbitMq
 
 $ ./installRabbitMQ.sh  安装了RabbitMq 和 其对应PHP扩展
 
@@ -11,6 +10,7 @@ $ composer install
 
 ###3. 演示demo
 
+<pre>
   ├── demo
      ├── amqp_consumer_exclusive.php
      ├── amqp_consumer_fanout_1.php
@@ -37,4 +37,4 @@ $ composer install
      ├── e2e_bindings.php
      ├── queue_arguments.php
      └── ssl_connection.php
-
+</pre>
