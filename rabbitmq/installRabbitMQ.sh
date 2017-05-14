@@ -33,7 +33,7 @@ sed -i "s/PATH.*/&\:\/usr\/local\/rabbitmq\/sbin/" /etc/profile
 export PATH=$PATH:/usr/local/rabbitmq/sbin
 source /etc/profile
 echo "[{rabbit, [{loopback_users, []}]}]." > /usr/local/rabbitmq/etc/rabbitmq/rabbitmq.config
-rabbitmq-server start
+rabbitmq-server -detached
 
 echo "+-----------------------------------+"
 echo "| 本机IP:15672"
