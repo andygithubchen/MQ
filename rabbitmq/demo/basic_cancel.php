@@ -1,5 +1,11 @@
 <?php
-
+/*==================================================
+ * 演示:
+ * 1. 建立与RabbitMq的链接，和创建一个管道
+ * 2. 声明一个队列和 一个消费者
+ * 3. 删除一个队列
+ *==================================================
+*/
 use PhpAmqpLib\Connection\AMQPStreamConnection;
 use PhpAmqpLib\Helper\Protocol\Wait091;
 

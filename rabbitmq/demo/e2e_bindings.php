@@ -1,7 +1,9 @@
 <?php
-
+/*
+ * 交换器之间的互相绑定
+ *
+*/
 include(__DIR__ . '/config.php');
-
 use PhpAmqpLib\Connection\AMQPStreamConnection;
 
 $source = 'my_source_exchange';

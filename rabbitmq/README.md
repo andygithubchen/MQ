@@ -1,6 +1,18 @@
 ## RabbitMq 消息队列
 RabbitMQ是实现AMQP（高级消息队列协议）的消息中间件的一种，主要是为了实现系统之间的双向解耦而实现的。当生产者大量产生数据时，消费者无法快速消费，那么需要一个中间层。保存这个数据。
-实际应用领域为邮件、短信的发送，订单状态的定时监控，多个应用之间的解耦等等。 而且有web管理界面（自带的插件实现的）。
+实际应用领域为邮件、短信的发送，订单状态的定时监控，多个应用之间的解耦等等。 而且有web管理界面（自带的插件实现的），默认账号是：guest  guest。
+
+### 名词解释
+1. 交换器（exchange）：可以理解为转发器
+
+RabbitMQ 是信息传输的中间者。本质上，他从生产者（producers）接收消息，转发这些消息给消费者（consumers）.换句话说，他能够按根据你指定的规则进行消息转发、缓冲、和持久化。
+
+Producing意味着无非是发送。一个发送消息的程序是一个producer(生产者)。
+Queue（队列）类似邮箱。依存于RabbitMQ内部。虽然消息通过RabbitMQ在你的应用中传递，但是它们只能存储在queue中。队列不受任何限制，可以存储任何数量的消息—本质上是一个无限制的缓存。很多producers可以通过同一个队列发送消息，相同的很多consumers可以从同一个队列上接收消息。
+Consuming（消费）类似于接收。consumer是基本属于等待接收消息的程序。
+
+ “producer（生产者）,consumer（消费者）,broker（RabbitMQ服务）并不需要部署在同一台机器上，实际上在大多数实际的应用中，也不会部署在同一台机器上。” 也就是说RabbitMq是支持分布式集群部署的。
+
 
 
 ### 1. 安装RabbitMq
@@ -45,17 +57,18 @@ $ composer install
 <pre>
 ├── demo
    ├── amqp_consumer_exclusive.php
-   ├── amqp_consumer_fanout_1.php
-   ├── amqp_consumer_fanout_2.php
    ├── amqp_consumer_non_blocking.php
-   ├── amqp_consumer.php
    ├── amqp_consumer_signals.php
    ├── amqp_ha_consumer.php
    ├── amqp_message_headers_recv.php
    ├── amqp_message_headers_snd.php
    ├── amqp_publisher_exclusive.php
-   ├── amqp_publisher_fanout.php
-   ├── amqp_publisher.php
+   ├── amqp_publisher_fanout.php  |生产者
+   ├── amqp_consumer_fanout_1.php |消费者1
+   ├── amqp_consumer_fanout_2.php |消费者2
+   ├── amqp_publisher.php |生产者
+   ├── amqp_consumer.php  |消费者
+
    ├── amqp_publisher_with_confirms_mandatory.php
    ├── amqp_publisher_with_confirms.php
    ├── basic_cancel.php
@@ -63,12 +76,12 @@ $ composer install
    ├── basic_nack.php
    ├── basic_qos.php
    ├── basic_return.php
-   ├── batch_publish.php  #基础的
-   ├── config.php         #配置文件
-   ├── delayed_message.php
+   ├── batch_publish.php
+   ├── config.php           |配置文件
+   ├── delayed_message.php  |延迟消息队列（必须要安装支持支持的插件）
    ├── e2e_bindings.php
-   ├── queue_arguments.php
-   └── ssl_connection.php
+   ├── queue_arguments.php  |声明一个消息队列的参数演示
+   └── ssl_connection.php   |链接 RabbitMq服务 时使用ssl方式
 </pre>
 
 ### 6. 进一步了解RabbitMq

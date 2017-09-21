@@ -1,35 +1,30 @@
 <?php
-
-require_once __DIR__ . '/../vendor/autoload.php';
-
+/*
+ * 这个例子主要演示basic_publish()的第三个参数$mandatory, 当为true时,
+ * 检查推送到的交换器上至少要有一个队列和这个交换器是绑定的，否则将消息返还给生产者；
+ *
+*/
+include(__DIR__ . '/config.php');
 use PhpAmqpLib\Connection\AMQPStreamConnection;
 use PhpAmqpLib\Message\AMQPMessage;
 
-$connection = new AMQPStreamConnection('localhost', 5672, 'guest', 'guest');
+$queue = 'queue_mandatory';
+
+$connection = new AMQPStreamConnection(HOST, PORT, USER, PASS, VHOST);
 $channel = $connection->channel();
 
-// declare  exchange but don`t bind any queue
 $channel->exchange_declare('hidden_exchange', 'topic');
+//如果不注释这两行就能看到效果
+$channel->queue_declare($queue, false, true, false, false);
+$channel->queue_bind($queue, 'hidden_exchange', 'rkey');
+
 
 $message = new AMQPMessage("Hello World!");
-
-echo " [x] Sent non-mandatory ...";
-$channel->basic_publish(
-    $message,
-    'hidden_exchange',
-    'rkey'
-);
-echo " done.\n";
+//$channel->basic_publish( $msg, $exchange = '', $routing_key = '', $mandatory = false, $immediate = false, $ticket = null) {}
+$channel->basic_publish($message, 'hidden_exchange', 'rkey', true);
 
 $wait = true;
-
-$returnListener = function (
-    $replyCode,
-    $replyText,
-    $exchange,
-    $routingKey,
-    $message
-) use ($wait) {
+$returnListener = function ($replyCode, $replyText, $exchange, $routingKey, $message) use ($wait) {
     $GLOBALS['wait'] = false;
 
     echo "return: ",
@@ -42,14 +37,6 @@ $returnListener = function (
 
 $channel->set_return_listener($returnListener);
 
-echo " [x] Sent mandatory ... ";
-$channel->basic_publish(
-    $message,
-    'hidden_exchange',
-    'rkey',
-    true
-);
-echo " done.\n";
 
 while ($wait) {
     $channel->wait();
