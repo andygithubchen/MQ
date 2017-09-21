@@ -1,4 +1,8 @@
 <?php
+/**
+ * queque的所有参数演示
+ *
+*/
 
 include(__DIR__ . '/config.php');
 use PhpAmqpLib\Connection\AMQPStreamConnection;

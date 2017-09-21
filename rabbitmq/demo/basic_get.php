@@ -1,5 +1,8 @@
 <?php
-
+/*
+ * 演示基础的消息获取方式
+ *
+*/
 include(__DIR__ . '/config.php');
 use PhpAmqpLib\Connection\AMQPStreamConnection;
 use PhpAmqpLib\Message\AMQPMessage;

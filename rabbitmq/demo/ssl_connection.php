@@ -1,5 +1,11 @@
 <?php
 
+/**
+ * 演示用ssl方式连接AMQP
+ * 使用./openssl.sh来配置有关ssl的东西
+ *
+*/
+
 include(__DIR__ . '/config.php');
 
 use PhpAmqpLib\Connection\AMQPSSLConnection;
