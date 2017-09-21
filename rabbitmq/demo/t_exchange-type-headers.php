@@ -47,7 +47,7 @@ $channel->basic_publish($message3, $exchange);
 function process_message1($message) {
     echo "\n--------\n";
     echo $message->body.'-----queue1----'.$message->delivery_info['routing_key'];
-    //print_r($message->get('application_headers')->getNativeData()); //@fixme 注意这里
+    print_r($message->get('application_headers')->getNativeData()); //@fixme 注意这里
     echo "\n--------\n";
 }
 function process_message2($message) {
