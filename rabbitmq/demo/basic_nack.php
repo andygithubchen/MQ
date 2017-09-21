@@ -19,11 +19,15 @@
  */
 include(__DIR__ . '/config.php');
 use PhpAmqpLib\Connection\AMQPStreamConnection;
+use PhpAmqpLib\Message\AMQPMessage;
+use PhpAmqpLib\Wire\AMQPTable;
 
 $exchange = 'router';
 $queue = 'msgs';
 $consumerTag = 'consumer';
 
+
+#1. 声明队列和交换器====================================================================
 //建立RabbitMq 服务链接，创建管道
 $connection = new AMQPStreamConnection(HOST, PORT, USER, PASS, VHOST);
 $channel = $connection->channel();
@@ -34,9 +38,18 @@ $channel->exchange_declare($exchange, 'direct', false, true, false);
 $channel->queue_bind($queue, $exchange);
 
 
+#2. 生产消息============================================================================
+$messageBody = implode(' ', array_slice($argv, 1));
+$channel->basic_publish(new AMQPMessage($messageBody), $exchange);
 
+
+#3. 开始消费============================================================================
 //消费者的回调函数
 function process_message($message) {
+    echo "\n--------\n";
+    echo $message->body;
+    echo "\n--------\n";
+
     //暂时不太了解这是干什么的，只是在管理界面的“Queues” ack 栏有差异。
     if ($message->body == 'good') {
         $message->delivery_info['channel']->basic_ack($message->delivery_info['delivery_tag']);

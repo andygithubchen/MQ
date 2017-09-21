@@ -21,29 +21,29 @@ $channel->queue_bind($queue, $exchange);
 
 
 #2. 生产消息============================================================================
-//$messageBody = implode(' ', array_slice($argv, 1));
-//$message = new AMQPMessage($messageBody);
-//$channel->basic_publish($message, $exchange);
-//
-//
-//#3. 调消费者 ===========================================================================
-//function process_message($message) {
-//    echo "\n--------\n";
-//    echo $message->body.'-----queue';
-//    echo "\n--------\n";
-//}
-//$channel->basic_consume($queue, "", false, false, false, false, 'process_message');
-//
-//function shutdown($channel, $connection) {
-//    $channel->close();
-//    $connection->close();
-//}
-//
-//register_shutdown_function('shutdown', $channel, $connection);
-//
-//while (count($channel->callbacks)) {
-//    $channel->wait();
-//}
+$messageBody = implode(' ', array_slice($argv, 1));
+$message = new AMQPMessage($messageBody);
+$channel->basic_publish($message, $exchange);
+
+
+#3. 调消费者 ===========================================================================
+function process_message($message) {
+    echo "\n--------\n";
+    echo $message->body.'-----queue';
+    echo "\n--------\n";
+}
+$channel->basic_consume($queue, "", false, false, false, false, 'process_message');
+
+function shutdown($channel, $connection) {
+    $channel->close();
+    $connection->close();
+}
+
+register_shutdown_function('shutdown', $channel, $connection);
+
+while (count($channel->callbacks)) {
+    $channel->wait();
+}
 
 
 
