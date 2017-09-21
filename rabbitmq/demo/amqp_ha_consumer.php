@@ -1,5 +1,10 @@
 <?php
 
+/*
+ * Rabbitmq集群
+ *http://www.rm5u.com/rabbitmq/rabbitmq-test.html
+ *
+ * */
 include(__DIR__ . '/config.php');
 
 use PhpAmqpLib\Connection\AMQPStreamConnection;
