@@ -84,6 +84,9 @@ $ composer install
    └── ssl_connection.php   |链接 RabbitMq服务 时使用ssl方式
 </pre>
 
+![Markdown preferences pane](http://wx3.sinaimg.cn/large/68252c5fly1fjsg9g7ul0j20xc0go7b3.jpg)
+
+
 ### 6. 进一步了解RabbitMq
 [RabbitMq 中文文档](https://geewu.gitbooks.io/rabbitmq-quick/content/index.html)
 
