@@ -1,7 +1,7 @@
 <?php
 /*
+ * 演示公平转发机制
  * 本例可以不用将队列绑定到交换器上，RabbitMq 会自动将其绑定到模式的交换器上(AMQP default)
- *
  *
 */
 include(__DIR__ . '/config.php');
@@ -12,8 +12,6 @@ $connection = new AMQPStreamConnection(HOST, PORT, USER, PASS, VHOST);
 $channel = $connection->channel();
 
 $channel->queue_declare('qos_queue', false, true, false, false);
-
-
 
 
 #1. 生产者推送消息 -------------------------------------------------------

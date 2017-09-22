@@ -56,38 +56,43 @@ $ composer install
 ### 5. 演示demo
 <pre>
 ├── demo
-   ├── amqp_consumer_exclusive.php
-   ├── amqp_consumer_non_blocking.php
-   ├── amqp_consumer_signals.php
-   ├── amqp_ha_consumer.php
-   ├── amqp_message_headers_recv.php
-   ├── amqp_message_headers_snd.php
-   ├── amqp_publisher_exclusive.php
-   ├── amqp_publisher_fanout.php  |生产者
-   ├── amqp_consumer_fanout_1.php |消费者1
-   ├── amqp_consumer_fanout_2.php |消费者2
-   ├── amqp_publisher.php |生产者
-   ├── amqp_consumer.php  |消费者
-
-   ├── amqp_publisher_with_confirms_mandatory.php
-   ├── amqp_publisher_with_confirms.php
-   ├── basic_cancel.php
-   ├── basic_get.php      #基础的获取消息内容
-   ├── basic_nack.php
-   ├── basic_qos.php
-   ├── basic_return.php
-   ├── batch_publish.php
-   ├── config.php           |配置文件
-   ├── delayed_message.php  |延迟消息队列（必须要安装支持支持的插件）
-   ├── e2e_bindings.php
-   ├── queue_arguments.php  |声明一个消息队列的参数演示
-   └── ssl_connection.php   |链接 RabbitMq服务 时使用ssl方式
+│   ├── amqp_consumer.php    |消费者参数解释
+│   ├── amqp_ha_consumer.php |Rabbitmq集群
+│   ├── amqp_publisher.php   |生产者参数解释
+│   ├── basic_cancel.php     |删除队列
+│   ├── basic_get.php        |基础的获取消息内容
+│   ├── basic_nack.php       |演示消息不需要被“确认”
+│   ├── basic_qos.php        |演示公平转发机制
+│   ├── basic_return.php     |演示生产者推送消息时必须指定routing_key
+│   ├── batch_publish.php    |演示批量推送消息
+│   ├── config.php           |配置文件
+│   ├── delayed_message.php  |延迟消息队列（必须要安装支持支持的插件）
+│   ├── e2e_bindings.php     |演示交换器之间的互相绑定
+│   ├── openssl.sh           |自动安装RabbitMQ需要的openssl支持
+│   ├── queue_arguments.php  |queque的所有参数演示
+│   ├── rabbit_ssl           |RabbitMQ 需要的openssl文件
+│   ├── ssl_connection.php   |链接 RabbitMq服务 时使用ssl方式
+│
+│   //测试例子
+│   ├── t_dl-routing-key.php
+│   ├── t_exchange-type-direct.php
+│   ├── t_exchange-type-fanout.php
+│   ├── t_exchange-type-headers.php
+│   ├── t_exchange-type-topic.php
+│   ├── t_expires.php
+│   ├── t_message-ttl.php
+│   ├── t_m-length-bytes.php
+│   ├── t_m-length.php
+│   ├── t_queue-declare-exclusive.php
+│   └── t_queue-priority.php
 </pre>
 
+
+### 6. RabbitMQ流程示图
 ![Markdown preferences pane](http://wx3.sinaimg.cn/large/68252c5fly1fjsg9g7ul0j20xc0go7b3.jpg)
 
 
-### 6. 进一步了解RabbitMq
+### 7. 进一步了解RabbitMq
 [RabbitMq 中文文档](https://geewu.gitbooks.io/rabbitmq-quick/content/index.html)
 
 [图文形象解释 RabbitMQ 三种 Exchange 模式](http://www.gaort.com/index.php/archives/366)

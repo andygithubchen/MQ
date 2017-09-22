@@ -1,6 +1,6 @@
 <?php
 /*
- * 这个例子主要演示basic_publish()的第三个参数$mandatory, 当为true时,
+ * 这个例子主要演示basic_publish()的第四个参数$mandatory, 当为true时,
  * 检查推送到的交换器上至少要有一个队列和这个交换器是绑定的，否则将消息返还给生产者；
  *
 */

@@ -1,6 +1,6 @@
 <?php
 /**
- * 演示该消息应该没有被“确认”，nack(no ack)
+ * 演示该消息不需要被“确认”，nack(no ack)
  *
  * - Start this consumer in one window by calling: php demo/basic_nack.php
  * - 在一个命令行窗口中开启消费者，用：php demo/basic_nack.php
