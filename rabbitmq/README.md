@@ -1,6 +1,7 @@
 ## RabbitMq 消息队列
 RabbitMQ是实现AMQP（高级消息队列协议）的消息中间件的一种，主要是为了实现系统之间的双向解耦而实现的。当生产者大量产生数据时，消费者无法快速消费，那么需要一个中间层。保存这个数据。
-实际应用领域为邮件、短信的发送，订单状态的定时监控，多个应用之间的解耦等等。 而且有web管理界面（自带的插件实现的），默认账号是：guest  guest。
+实际应用领域为邮件、短信的发送，订单状态的定时监控，多个应用之间的解耦等等。
+而且有web管理界面（自带的插件实现的），地址是：本机IP:15672，默认账号是：guest  guest。 （当然端口和账号都要和demo/config.php里的一致）。
 
 ### 名词解释
 1. 交换器（exchange）：可以理解为转发器
@@ -56,11 +57,11 @@ $ composer install
 ### 5. 演示demo
 <pre>
 ├── demo
-│   ├── amqp_consumer.php    |消费者参数解释
-│   ├── amqp_ha_consumer.php |Rabbitmq集群
-│   ├── amqp_publisher.php   |生产者参数解释
-│   ├── basic_cancel.php     |删除队列
-│   ├── basic_get.php        |基础的获取消息内容
+│   ├── amqp_consumer.php    |解释消费者参数
+│   ├── amqp_ha_consumer.php |演示Rabbitmq集群
+│   ├── amqp_publisher.php   |解释生产者参数
+│   ├── basic_cancel.php     |演示删除队列
+│   ├── basic_get.php        |演示基础的获取消息内容
 │   ├── basic_nack.php       |演示消息不需要被“确认”
 │   ├── basic_qos.php        |演示公平转发机制
 │   ├── basic_return.php     |演示生产者推送消息时必须指定routing_key
@@ -69,7 +70,7 @@ $ composer install
 │   ├── delayed_message.php  |延迟消息队列（必须要安装支持支持的插件）
 │   ├── e2e_bindings.php     |演示交换器之间的互相绑定
 │   ├── openssl.sh           |自动安装RabbitMQ需要的openssl支持
-│   ├── queue_arguments.php  |queque的所有参数演示
+│   ├── queue_arguments.php  |演示queque的所有参数
 │   ├── rabbit_ssl           |RabbitMQ 需要的openssl文件
 │   ├── ssl_connection.php   |链接 RabbitMq服务 时使用ssl方式
 │
