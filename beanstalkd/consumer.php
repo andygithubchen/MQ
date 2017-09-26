@@ -8,13 +8,14 @@ while(true){
     $result = touch($job['body']);
 
     print_r($job);
-    print_r($result);
+    //print_r($result);
 
-    if($result){
-        $beanstalk->delete($job['id']);
-    }else{
-        $beanstalk->bury($job['id']);
-    }
+        $beanstalk->bury($job['id'], 11);
+    //if($result){
+    //    $beanstalk->delete($job['id']);
+    //}else{
+    //    $beanstalk->bury($job['id'], 11);
+    //}
 }
 
 $beanstalk->disconnect();
