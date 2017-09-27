@@ -1,7 +1,7 @@
 <?php
 
 $beanstalk = require_once('./beanstalk_client/beanstalkObj.php');
-//$beanstalk->useTube('andy');
+$beanstalk->useTube('andy');
 
 //$info = $beanstalk->statsJob(2);
 //$info = $beanstalk->statsTube('andy');
@@ -17,7 +17,8 @@ $beanstalk = require_once('./beanstalk_client/beanstalkObj.php');
 //$info = $beanstalk->peekDelayed();
 //$info = $beanstalk->peekBuried();
 //$info = $beanstalk->kick(2);
-//$info = $beanstalk->kickJob(5);
+//echo  $beanstalk->kickJob(14);
+//echo  $beanstalk->kickJob(16);
 
 
 
@@ -32,8 +33,6 @@ $beanstalk = require_once('./beanstalk_client/beanstalkObj.php');
 //$beanstalk->reserve();
 //echo $beanstalk->bury(55,10);
 
-$beanstalk->watch('andy');
-echo $beanstalk->ignore('andy');
 
 
 

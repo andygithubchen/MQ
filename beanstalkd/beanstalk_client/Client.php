@@ -245,7 +245,7 @@ class Client {
 	}
 
 	/**
-     * 针对特定的tube内所有新的job延迟给定的秒数
+     * 使指定的管道内, 今后所添加的新job在指定的$delay时间后才能被reserve()取出（预订）来处理。
 	 *
 	 * @param string $tube 要暂停的管道名称
 	 * @param integer $delay  要暂停的时间（秒）
@@ -316,7 +316,7 @@ class Client {
 	}
 
 	/**
-	 * 将一个保留的job放回到ready队列。
+	 * 将一个reserve()后的job放回到ready或delayed队列（也就是在reserve()后用release()，而且前后都不能用delete()）
 	 * @param  integer  $id      这个job 的ID
 	 * @param  integer  $pri     job的优先级
 	 * @param  integer  $delay   延迟ready的秒数
@@ -338,7 +338,7 @@ class Client {
 	}
 
 	/**
-     * 将一个job放入到buried状态，并且它会被放入FIFO链接列表中，
+     * 将一个被reserve()取出（预订）后的job放入到buried状态，并且它会被放入FIFO链接列表中，
      * 直到客户端kick这些job，不然它们不会被处理。
 	 *
 	 * @param integer $id 这个job 的ID
@@ -401,7 +401,7 @@ class Client {
 	}
 
 	/**
-	 * 从已监控的watch list列表中移出特定的tube
+	 * consumers消费者可以通过发送ignore()来取消监控tube（也就是在watch()之后reserve()之前做） 
      *
 	 * @param string $tube  管道名
 	 * @return integer|boolean `false` 表示移出失败
@@ -434,7 +434,7 @@ class Client {
 	}
 
 	/**
-	 * 让client在系统中检查job， 返回下一个ready job
+	 * 让client在系统中检查job，获取最早一个处于“Ready”状态的job、注意、只能获取当前tube的job
 	 *
 	 * @return string|boolean `false` 表示失败
 	 */
@@ -444,7 +444,7 @@ class Client {
 	}
 
 	/**
-	 * 让client在系统中检查job，返回下一个延迟剩余时间最短的job
+     * 让client在系统中检查job，获取最早一个处于“Delayed”状态的job、注意、只能获取当前tube的job
 	 *
 	 * @return string|boolean `false` 表示失败
 	 */
@@ -454,7 +454,7 @@ class Client {
 	}
 
 	/**
-	 * 让client在系统中检查job，返回下一个在buried列表中的job
+     * 让client在系统中检查job，获取最早一个处于“Buried”状态的job、注意、只能获取当前tube的job
      *
 	 * @return string|boolean `false` 表示失败
 	 */
@@ -485,10 +485,8 @@ class Client {
 	}
 
 	/**
-     * 它将当前tube中所有job的状态迁移为ready或者delayed
+     * 它将当前tube中状态为Buried的job迁移为ready状态，一次最多迁移$bound个。
      *
-     * 只有delayed(延时)job才会被kick，而buried状态的job不会被kick。
-	 *
 	 * @param integer $bound 唤醒的job上限数
 	 * @return integer|boolean False 表示出错；返回数字时表示被唤醒的job数。
 	 */
@@ -506,10 +504,7 @@ class Client {
 	}
 
 	/**
-     * 上面的kick()方法是操作所有的job，这是操作指定的job。
-     *
-     * 通过指定的job ID 找到对应的job，如果指定的job ID存在并且处于buried状态或deleted状态，
-     * 它将被移动到ready队列中
+     * 它将当前tube中状态为Buried或Delayed的job迁移为ready状态。
      *
 	 * @param integer $id 指定的 job ID.
 	 * @return boolean `false` 表示失败
