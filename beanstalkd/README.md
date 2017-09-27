@@ -1,9 +1,9 @@
 *beanstalk是一个相对比RabbitMQ简单很多的MQ服务，在这里收集了beanstalk常用的工具，对Client.php里主要方法的注释整理成中文*
 ---
-### beanstalk php 操作类 beanstalk_client/Client.php里的主要方法注释
+beanstalk php 操作类 beanstalk_client/Client.php里的主要方法注释
 ---
 
-``php
+```php
 $beanstalk = new Beanstalk\Client();
 $beanstalk->connect();   //启动与Beanstalk服务器的套接字连接。 生成的流将不会有任何超时设置。
 $beanstalk->disconnect() //如果要退出，通过第一个信令关闭在beanstalk服务器的连接,
@@ -37,9 +37,9 @@ $beanstalk->stats()                       //获取整个消息队列系统的整
 $beanstalk->listTubes()                   //返回所有存在的管道列表
 $beanstalk->listTubeUsed()                //返回生产者当前正在使用的管道。
 $beanstalk->listTubesWatched()            //返回消息消费端当前正在监视的管道列表。
-``
+```
 
-### 文件说明
+文件说明
 ---
 <pre>
 .
@@ -54,12 +54,12 @@ $beanstalk->listTubesWatched()            //返回消息消费端当前正在监
 └── t.php                // 测试文件
 </pre>
 
-### 流程图
+流程图
 ---
 ![1](http://wx3.sinaimg.cn/large/68252c5fly1fjycxwyk1zj20nm06ymzt.jpg)
 ![2](http://wx1.sinaimg.cn/large/68252c5fly1fjycy7pnu4j20p00jgq82.jpg)
 
-### 其他
+其他
 ---
 1. beanstalk 中文文档：https://github.com/kr/beanstalkd/blob/master/doc/protocol.zh-CN.md
 2. beanstalk 下载地址：https://github.com/kr/beanstalkd/releases
