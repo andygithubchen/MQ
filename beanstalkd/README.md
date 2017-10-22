@@ -59,6 +59,13 @@ $beanstalk->listTubesWatched();            //返回消息消费端当前正在�
 ![1](http://wx3.sinaimg.cn/large/68252c5fly1fjycxwyk1zj20nm06ymzt.jpg)
 ![2](http://wx1.sinaimg.cn/large/68252c5fly1fjycy7pnu4j20p00jgq82.jpg)
 
+问题
+---
+一、当beanstalkd 服务意外停止后对延时队列（delayed）的影响：
+  1. 重启beanstalkd服务后, 还未到时的延时队列还会存在delayed队列里。
+  2. 重启beanstalkd服务后, 在重启beanstalkd服务之前已经到时的延时队列已经被移动到ready队列了。
+  所以beanstalkd 服务意外停止后对延时队列（delayed）的影响只有一种，就是重启beanstalkd服务之前已经到时的延时队列不能按原来预订的时间后被处理。
+
 其他
 ---
 1. beanstalk 中文文档：https://github.com/kr/beanstalkd/blob/master/doc/protocol.zh-CN.md
