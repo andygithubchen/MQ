@@ -73,4 +73,4 @@ $beanstalk->listTubesWatched();            //返回消息消费端当前正在�
 2. beanstalk 下载地址：https://github.com/kr/beanstalkd/releases
 3. 管理工具（浏览器上）：https://github.com/ptrofimov/beanstalk_console
 4. beanstalk php 操作类：https://github.com/davidpersson/beanstalk
-`
+
