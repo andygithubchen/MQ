@@ -8,8 +8,9 @@ make
 make install
 #make install PREFIX=/opt/modules/beanstalkd/ #指定安装路径
 
-mkdir -p /andydata/log/beanstalkd/
-beanstalkd -l 127.0.0.1 -p 11300 -b /andydata/log/beanstalkd/ &
+logPath=/andydata/log/beanstalkd/
+mkdir -p $logPath
+beanstalkd -l 127.0.0.1 -p 11300 -b $logPath &
 
 
 #beanstalkd -v #查看版本号
