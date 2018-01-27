@@ -8,10 +8,13 @@ make
 make install
 #make install PREFIX=/opt/modules/beanstalkd/ #指定安装路径
 
-logPath=/var/log/beanstalkd/
+logPath=/var/lib/beanstalkd/
 mkdir -p $logPath
-cp ./beanstalk /etc/init.d/beanstalkd
-/etc/init.d/beanstalkd start
+
+/usr/local/bin/beanstalkd -b $logPath -F &
+
+echo "/usr/local/bin/beanstalkd -b /var/lib/beanstalkd/ -F &"
+
 
 #beanstalkd -v #查看版本号
 #beanstalkd -VVV  快速启动beanstalkd
