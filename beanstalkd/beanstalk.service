@@ -1,0 +1,9 @@
+[Unit]
+Description=Beanstalkd
+
+[Service]
+Type=simple
+ExecStart=/usr/local/bin/beanstalkd -b /var/lib/beanstalkd/
+
+[Install]
+WantedBy=multi-user.target
