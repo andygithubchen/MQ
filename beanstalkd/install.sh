@@ -15,6 +15,14 @@ mkdir -p $logPath
 
 echo "/usr/local/bin/beanstalkd -b /var/lib/beanstalkd/ -F &"
 
+autoStart(){
+  cp ./beanstalk.service /etc/systemd/system/beanstalk.service
+  sudo systemctl enable beanstalk.service
+  sudo systemctl start beanstalk.service
+  sudo systemctl status beanstalk.service
+}
+
+autoStart
 
 #beanstalkd -v #查看版本号
 #beanstalkd -VVV  快速启动beanstalkd
